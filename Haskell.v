@@ -66,11 +66,29 @@ Class Monad (M: Type -> Type) := {
         : forall (A : Type) (m : M A)
         , id m = join (fmap unit m);
 
-    monad_join_associative
+    (* monad_join_associative
         : forall (A : Type) (m : M (M (M A)))
-        , join m = fmap join m
+        , join m = fmap join m *)
+
+    monad_join_fmap_associative
+        : forall (A B C : Type) (m : M A) (k : A -> M B) (h : B -> M C)
+        , join (fmap (fun x : A => join (fmap h (k x))) m) = join (fmap h (join (fmap k m)))
 
 }.
+
+Definition bind {M : Type -> Type} {ismonad : Monad M} {A B : Type} (m : M A) (f : A -> M B) : M B :=
+    join (fmap f m).
+
+Notation "m >>= f" := (bind m f) (at level 50).
+
+Theorem bind_associative 
+    : forall (A B C : Type) (M : Type -> Type) (monad_dict : Monad M) (m : M A) (k : A -> M B) (h : B -> M C)
+    , m >>= (fun (x : A) => (k x >>= h)) = (m >>= k) >>= h.
+Proof.
+    intros.
+    unfold bind.
+    apply monad_join_fmap_associative.
+Qed.
 
 
 Inductive myMaybe (A : Type) : Type :=
@@ -115,7 +133,7 @@ Proof.
     reflexivity.
     unfold id.
     reflexivity.
-Qed.
+Defined.
 
 Instance maybe_applicative : Applicative myMaybe := {
     unit := @just;
@@ -144,10 +162,11 @@ Proof.
     -   intros.
         simpl.
         destruct x as [| x'].
-        unfold fmap.
-        rewrite <- maybe_functor.
-    
-Qed.
+        unfold maybeMap.
+        reflexivity.
+        unfold maybeMap.
+        reflexivity.
+Defined.
 
 Instance maybe_monad : Monad myMaybe := {
     join := @joinMaybe
@@ -155,6 +174,37 @@ Instance maybe_monad : Monad myMaybe := {
 Proof.
     - intros.
         unfold joinMaybe.
-        unfold unit.
         unfold fmap.
+        unfold is_functor.
+        unfold maybe_applicative.
+        unfold maybe_functor.
+        unfold maybeMap.
+        unfold unit.
+        reflexivity.
+    - intros.
+        unfold id.
+        unfold joinMaybe.
+        unfold fmap.
+        unfold is_functor.
+        unfold maybe_applicative.
+        unfold maybe_functor.
+        unfold maybeMap.
+        destruct m as [| x].
+        reflexivity.
+        unfold unit.
+        reflexivity.
+    - intros.
+        unfold fmap.
+        unfold is_functor.
+        unfold maybe_applicative.
+        unfold maybe_functor.
+        unfold maybeMap.
+        destruct m as [| x].
         simpl.
+        reflexivity.
+        destruct (k x) as [| kx].
+        simpl.
+        reflexivity.
+        simpl.
+        reflexivity.
+Defined.
