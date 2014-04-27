@@ -11,17 +11,17 @@ Class Comonad (W : Type -> Type) := {
     duplicate : forall {A : Type}, W A -> W (W A);
 
     (* Comonad Laws *)
-    counit_left_inverse
+    counit_left_identity
     : forall (A : Type) (w : W A)
-    , (compose counit duplicate) w = w;
+    , counit (duplicate w) = w;
 
 
-    counit_right_inverse
+    counit_right_identity
     : forall (A : Type) (w : W A)
-    , (compose (fmap counit) duplicate) w = w;
+    , fmap counit (duplicate w) = w;
 
     duplicate_squared
     : forall (A : Type) (w : W A)
-    , (compose duplicate duplicate) w = (compose (fmap duplicate) duplicate) w
+    , duplicate (duplicate w) = (fmap duplicate) (duplicate w)
 
 }.

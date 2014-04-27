@@ -20,8 +20,8 @@ Class Monad (M: Type -> Type) := {
         , m = join (fmap unit m);
 
     monad_join_fmap_associative
-        : forall (A B C : Type) (m : M A) (k : A -> M B) (h : B -> M C)
-        , join (fmap (fun x : A => join (fmap h (k x))) m) = join (fmap h (join (fmap k m)))
+        : forall (A : Type) (m : M (M (M A)))
+        , join (join m) = join (fmap join m)
 
 }.
 
