@@ -1,4 +1,5 @@
 Require Import Applicative.
+Require Import Function.
 Require Import Functor.
 
 Class Monad (M: Type -> Type) := {
@@ -16,7 +17,7 @@ Class Monad (M: Type -> Type) := {
 
     monad_unit_right_identity
         : forall (A : Type) (m : M A)
-        , id m = join (fmap unit m);
+        , m = join (fmap unit m);
 
     monad_join_fmap_associative
         : forall (A B C : Type) (m : M A) (k : A -> M B) (h : B -> M C)
