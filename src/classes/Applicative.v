@@ -33,4 +33,13 @@ Class Applicative (F: Type -> Type) := {
 
 Notation "v <*> w" := (apply v w) (at level 50).
 
-
+Theorem fmap_unit
+    : forall (F : Type -> Type) (app_dict : Applicative F) (A B : Type) (f : A -> B) (x : A)
+    , fmap f (unit x) = unit (f x).
+Proof.
+    intros.
+    rewrite -> unit_fmap.
+    rewrite -> unit_interchange.
+    rewrite -> unit_homomorphism.
+    reflexivity.
+Qed.

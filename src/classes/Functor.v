@@ -8,7 +8,7 @@ Class Functor (functor: Type -> Type) := {
         , forall (g : B -> C)
         , forall (f : A -> B)
         , forall (c : functor A)
-        , (compose (fmap g) (fmap f)) c = fmap (compose g f) c;
+        , fmap g (fmap f c) = fmap (compose g f) c;
 
     functor_id_law
         : forall (A : Type), forall (c : functor A), fmap id c = id c

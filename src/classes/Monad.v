@@ -25,6 +25,18 @@ Class Monad (M: Type -> Type) := {
 
 }.
 
+Theorem monad_unit_left_identity_1
+    : forall (M : Type -> Type) (A : Type) (m : M A) (monad_dict : Monad M)
+    , m = join (unit m).
+Proof.
+    intros.
+    assert (id m = join (fmap id (unit m))).
+    apply monad_unit_left_identity.
+    rewrite -> functor_id_law in H.
+    unfold id in H.
+    assumption.
+Qed.
+
 Definition bind {M : Type -> Type} {ismonad : Monad M} {A B : Type} (m : M A) (f : A -> M B) : M B :=
     join (fmap f m).
 
