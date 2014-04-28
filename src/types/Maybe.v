@@ -176,16 +176,39 @@ Proof.
     unfold is_functor.
     unfold maybe_applicative.
     unfold maybe_functor.
+    unfold maybeMap.
+    destruct m as [| mma].
+        unfold maybeJoin.
+        reflexivity.
+
+        unfold maybeJoin.
+        destruct mma as [| ma].
+            reflexivity.
+
+            reflexivity.
+
+-
+    intros.
     destruct m as [| a].
+        unfold fmap.
+        unfold is_functor.
+        unfold maybe_applicative.
+        unfold maybe_functor.
         unfold maybeMap.
         unfold maybeJoin.
         reflexivity.
 
+        unfold fmap.
+        unfold is_functor.
+        unfold maybe_applicative.
+        unfold maybe_functor.
         unfold maybeMap.
+        unfold compose.
         destruct (k a) as [| ka].
             unfold maybeJoin.
             reflexivity.
 
             unfold maybeJoin.
             reflexivity.
+
 Defined.
