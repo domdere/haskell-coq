@@ -5,3 +5,5 @@ Require Import Comonad.
 Require Import Monad.
 
 Require Import Maybe.
+
+Require Export Functor.

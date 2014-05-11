@@ -8,8 +8,8 @@ type_src_dir := $(src_dir)/types
 output_dir := build
 
 class_build_src := $(patsubst $(class_src_dir)/%.v,$(output_dir)/%.v,$(coqsource))
-type_build_src := $(patsubst $(type_src_dir)/%.v,$(output_dir)/%.v,$(coqsource))
-all_build_src := $(class_build_src) $(type_build_src) $(output_dir)/Haskell.v
+type_build_src := $(patsubst $(type_src_dir)/%.v,$(output_dir)/%.v,$(class_build_src))
+all_build_src := $(patsubst $(src_dir)/%.v,$(output_dir)/%.v,$(type_build_src))
 drop_build_dir := $(patsubst $(output_dir)/%,%,$(all_build_src))
 
 .PHONY: clean
@@ -17,7 +17,7 @@ drop_build_dir := $(patsubst $(output_dir)/%,%,$(all_build_src))
 default: all
 
 makefile: $(all_build_src)
-	cd $(output_dir); $(coq_makefile) Haskell.v > Makefile.coq
+	cd $(output_dir); $(coq_makefile) $(drop_build_dir) > Makefile.coq
 
 console: $(all_build_src)
 	cd $(output_dir); $(coq_top)
