@@ -16,6 +16,9 @@ drop_build_dir := $(patsubst $(output_dir)/%,%,$(all_build_src))
 
 default: all
 
+html: makefile
+	cd $(output_dir); make -f Makefile.coq html
+
 makefile: $(all_build_src)
 	cd $(output_dir); $(coq_makefile) $(drop_build_dir) > Makefile.coq
 
