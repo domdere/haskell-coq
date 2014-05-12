@@ -160,18 +160,28 @@ Proof.
     reflexivity.
 Qed.
 
+(* I can't manage to prove this,
+   but its the crucial missing part for adjoint_join_associative
+   its a well known result and it hinges on the
+   interchange law between functors and natural transformations.
+*)
+Lemma adjoint_counit_lifts
+    : forall (F G : Type -> Type) (A : Type) (adjunction : Adjunction F G)
+    , compose (fmap (@adjoint_counit F G adjunction (F A))) (fmap (fmap (fmap adjoint_counit))) = compose (fmap adjoint_counit) (fmap adjoint_counit).
+Proof.
+    intros.
+    apply extensional_equality.
+    unfold compose.
+    admit.
+Qed.
+
 Theorem adjoint_join_associative
     : forall (F G : Type -> Type) (A : Type) (adjunction : Adjunction F G)
     , compose adjoint_join (@adjoint_join F G adjunction (G (F A))) = compose adjoint_join ((compose fmap fmap) adjoint_join).
 Proof.
     intros.
-    apply extensional_equality.
-    intros.
-    unfold compose.
+    unfold compose at 3.
     unfold adjoint_join.
-    unfold adjoint_counit.
-    rewrite -> functors_preserve_composition.
-    rewrite -> functors_preserve_composition.
-    rewrite <- adjoint_natural_3_pointfree.
-    rewrite -> compose_left_identity.
-    (* Need the interchange law here... *)
+    rewrite -> adjoint_counit_lifts.
+    reflexivity.
+Qed.
