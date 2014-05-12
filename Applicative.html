@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link href="coqdoc.css" rel="stylesheet" type="text/css"/>
+<title>Applicative</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library Applicative</h1>
+
+<div class="code">
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="keyword">Function</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <a class="idref" href="Functor.html#"><span class="id" type="library">Functor</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Class</span> <a name="Applicative"><span class="id" type="record">Applicative</span></a> (<span class="id" type="var">F</span>: <span class="id" type="keyword">Type</span> → <span class="id" type="keyword">Type</span>) := {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a name="is_functor"><span class="id" type="projection">is_functor</span></a> :&gt; <a class="idref" href="Functor.html#Functor"><span class="id" type="class">Functor</span></a> <a class="idref" href="Applicative.html#F"><span class="id" type="variable">F</span></a>;<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a name="unit"><span class="id" type="projection">unit</span></a> : <span class="id" type="keyword">∀</span> {<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>}, <a class="idref" href="Applicative.html#A"><span class="id" type="variable">A</span></a> → <a class="idref" href="Applicative.html#F"><span class="id" type="variable">F</span></a> <a class="idref" href="Applicative.html#A"><span class="id" type="variable">A</span></a>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a name="apply"><span class="id" type="projection">apply</span></a> : <span class="id" type="keyword">∀</span> {<span class="id" type="var">A</span> <span class="id" type="var">B</span> : <span class="id" type="keyword">Type</span>}, <a class="idref" href="Applicative.html#F"><span class="id" type="variable">F</span></a> (<a class="idref" href="Applicative.html#A"><span class="id" type="variable">A</span></a> → <a class="idref" href="Applicative.html#B"><span class="id" type="variable">B</span></a>) → <a class="idref" href="Applicative.html#F"><span class="id" type="variable">F</span></a> <a class="idref" href="Applicative.html#A"><span class="id" type="variable">A</span></a> → <a class="idref" href="Applicative.html#F"><span class="id" type="variable">F</span></a> <a class="idref" href="Applicative.html#B"><span class="id" type="variable">B</span></a>;<br/>
+<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a name="unit_identity"><span class="id" type="projection">unit_identity</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <span class="id" type="keyword">∀</span> (<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">x</span> : <a class="idref" href="Applicative.html#F"><span class="id" type="variable">F</span></a> <a class="idref" href="Applicative.html#A"><span class="id" type="variable">A</span></a>), <a class="idref" href="Applicative.html#apply"><span class="id" type="method">apply</span></a> (<a class="idref" href="Applicative.html#unit"><span class="id" type="method">unit</span></a> <a class="idref" href="Function.html#id"><span class="id" type="definition">id</span></a>) <a class="idref" href="Applicative.html#x"><span class="id" type="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl3/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">=</span></a> <a class="idref" href="Applicative.html#x"><span class="id" type="variable">x</span></a>;<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a name="unit_compose"><span class="id" type="projection">unit_compose</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <span class="id" type="keyword">∀</span> (<span class="id" type="var">A</span> <span class="id" type="var">B</span> <span class="id" type="var">C</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">u</span> : <a class="idref" href="Applicative.html#F"><span class="id" type="variable">F</span></a> (<a class="idref" href="Applicative.html#B"><span class="id" type="variable">B</span></a> → <a class="idref" href="Applicative.html#C"><span class="id" type="variable">C</span></a>)) (<span class="id" type="var">v</span> : <a class="idref" href="Applicative.html#F"><span class="id" type="variable">F</span></a> (<a class="idref" href="Applicative.html#A"><span class="id" type="variable">A</span></a> → <a class="idref" href="Applicative.html#B"><span class="id" type="variable">B</span></a>)) (<span class="id" type="var">w</span> : <a class="idref" href="Applicative.html#F"><span class="id" type="variable">F</span></a> <a class="idref" href="Applicative.html#A"><span class="id" type="variable">A</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;, <a class="idref" href="Applicative.html#apply"><span class="id" type="method">apply</span></a> (<a class="idref" href="Applicative.html#apply"><span class="id" type="method">apply</span></a> (<a class="idref" href="Applicative.html#apply"><span class="id" type="method">apply</span></a> (<a class="idref" href="Applicative.html#unit"><span class="id" type="method">unit</span></a> <a class="idref" href="Function.html#compose"><span class="id" type="definition">compose</span></a>) <a class="idref" href="Applicative.html#u"><span class="id" type="variable">u</span></a>) <a class="idref" href="Applicative.html#v"><span class="id" type="variable">v</span></a>) <a class="idref" href="Applicative.html#w"><span class="id" type="variable">w</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl3/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">=</span></a> <a class="idref" href="Applicative.html#apply"><span class="id" type="method">apply</span></a> <a class="idref" href="Applicative.html#u"><span class="id" type="variable">u</span></a> (<a class="idref" href="Applicative.html#apply"><span class="id" type="method">apply</span></a> <a class="idref" href="Applicative.html#v"><span class="id" type="variable">v</span></a> <a class="idref" href="Applicative.html#w"><span class="id" type="variable">w</span></a>);<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a name="unit_homomorphism"><span class="id" type="projection">unit_homomorphism</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <span class="id" type="keyword">∀</span> (<span class="id" type="var">A</span> <span class="id" type="var">B</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">f</span> : <a class="idref" href="Applicative.html#A"><span class="id" type="variable">A</span></a> → <a class="idref" href="Applicative.html#B"><span class="id" type="variable">B</span></a>) (<span class="id" type="var">x</span> : <a class="idref" href="Applicative.html#A"><span class="id" type="variable">A</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;, <a class="idref" href="Applicative.html#apply"><span class="id" type="method">apply</span></a> (<a class="idref" href="Applicative.html#unit"><span class="id" type="method">unit</span></a> <a class="idref" href="Applicative.html#f"><span class="id" type="variable">f</span></a>) (<a class="idref" href="Applicative.html#unit"><span class="id" type="method">unit</span></a> <a class="idref" href="Applicative.html#x"><span class="id" type="variable">x</span></a>) <a class="idref" href="http://coq.inria.fr/distrib/8.4pl3/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">=</span></a> <a class="idref" href="Applicative.html#unit"><span class="id" type="method">unit</span></a> (<a class="idref" href="Applicative.html#f"><span class="id" type="variable">f</span></a> <a class="idref" href="Applicative.html#x"><span class="id" type="variable">x</span></a>);<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a name="unit_interchange"><span class="id" type="projection">unit_interchange</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <span class="id" type="keyword">∀</span> (<span class="id" type="var">A</span> <span class="id" type="var">B</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">u</span> : <a class="idref" href="Applicative.html#F"><span class="id" type="variable">F</span></a> (<a class="idref" href="Applicative.html#A"><span class="id" type="variable">A</span></a> → <a class="idref" href="Applicative.html#B"><span class="id" type="variable">B</span></a>)) (<span class="id" type="var">x</span> : <a class="idref" href="Applicative.html#A"><span class="id" type="variable">A</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;, <a class="idref" href="Applicative.html#apply"><span class="id" type="method">apply</span></a> <a class="idref" href="Applicative.html#u"><span class="id" type="variable">u</span></a> (<a class="idref" href="Applicative.html#unit"><span class="id" type="method">unit</span></a> <a class="idref" href="Applicative.html#x"><span class="id" type="variable">x</span></a>) <a class="idref" href="http://coq.inria.fr/distrib/8.4pl3/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">=</span></a> <a class="idref" href="Applicative.html#apply"><span class="id" type="method">apply</span></a> (<a class="idref" href="Applicative.html#unit"><span class="id" type="method">unit</span></a> (<span class="id" type="keyword">fun</span> (<span class="id" type="var">f</span> : <a class="idref" href="Applicative.html#A"><span class="id" type="variable">A</span></a> → <a class="idref" href="Applicative.html#B"><span class="id" type="variable">B</span></a>) ⇒ <a class="idref" href="Applicative.html#f"><span class="id" type="variable">f</span></a> <a class="idref" href="Applicative.html#x"><span class="id" type="variable">x</span></a>)) <a class="idref" href="Applicative.html#u"><span class="id" type="variable">u</span></a>;<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a name="unit_fmap"><span class="id" type="projection">unit_fmap</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <span class="id" type="keyword">∀</span> (<span class="id" type="var">A</span> <span class="id" type="var">B</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">f</span> : <a class="idref" href="Applicative.html#A"><span class="id" type="variable">A</span></a> → <a class="idref" href="Applicative.html#B"><span class="id" type="variable">B</span></a>) (<span class="id" type="var">x</span> : <a class="idref" href="Applicative.html#F"><span class="id" type="variable">F</span></a> <a class="idref" href="Applicative.html#A"><span class="id" type="variable">A</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;, <a class="idref" href="Functor.html#fmap"><span class="id" type="method">fmap</span></a> <a class="idref" href="Applicative.html#f"><span class="id" type="variable">f</span></a> <a class="idref" href="Applicative.html#x"><span class="id" type="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl3/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">=</span></a> <a class="idref" href="Applicative.html#apply"><span class="id" type="method">apply</span></a> (<a class="idref" href="Applicative.html#unit"><span class="id" type="method">unit</span></a> <a class="idref" href="Applicative.html#f"><span class="id" type="variable">f</span></a>) <a class="idref" href="Applicative.html#x"><span class="id" type="variable">x</span></a><br/>
+}.<br/>
+
+<br/>
+<span class="id" type="keyword">Notation</span> <a name="::x_'<*>'_x"><span class="id" type="notation">"</span></a>v &lt;*&gt; w" := (<a class="idref" href="Applicative.html#apply"><span class="id" type="method">apply</span></a> <span class="id" type="var">v</span> <span class="id" type="var">w</span>) (<span class="id" type="tactic">at</span> <span class="id" type="keyword">level</span> 50).<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="fmap_unit"><span class="id" type="lemma">fmap_unit</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;: <span class="id" type="keyword">∀</span> (<span class="id" type="var">F</span> : <span class="id" type="keyword">Type</span> → <span class="id" type="keyword">Type</span>) (<span class="id" type="var">app_dict</span> : <a class="idref" href="Applicative.html#Applicative"><span class="id" type="class">Applicative</span></a> <a class="idref" href="Applicative.html#F"><span class="id" type="variable">F</span></a>) (<span class="id" type="var">A</span> <span class="id" type="var">B</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">f</span> : <a class="idref" href="Applicative.html#A"><span class="id" type="variable">A</span></a> → <a class="idref" href="Applicative.html#B"><span class="id" type="variable">B</span></a>) (<span class="id" type="var">x</span> : <a class="idref" href="Applicative.html#A"><span class="id" type="variable">A</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;, <a class="idref" href="Functor.html#fmap"><span class="id" type="method">fmap</span></a> <a class="idref" href="Applicative.html#f"><span class="id" type="variable">f</span></a> (<a class="idref" href="Applicative.html#unit"><span class="id" type="method">unit</span></a> <a class="idref" href="Applicative.html#x"><span class="id" type="variable">x</span></a>) <a class="idref" href="http://coq.inria.fr/distrib/8.4pl3/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">=</span></a> <a class="idref" href="Applicative.html#unit"><span class="id" type="method">unit</span></a> (<a class="idref" href="Applicative.html#f"><span class="id" type="variable">f</span></a> <a class="idref" href="Applicative.html#x"><span class="id" type="variable">x</span></a>).<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">intros</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">rewrite</span> → <a class="idref" href="Applicative.html#unit_fmap"><span class="id" type="method">unit_fmap</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">rewrite</span> → <a class="idref" href="Applicative.html#unit_interchange"><span class="id" type="method">unit_interchange</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">rewrite</span> → <a class="idref" href="Applicative.html#unit_homomorphism"><span class="id" type="method">unit_homomorphism</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">reflexivity</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

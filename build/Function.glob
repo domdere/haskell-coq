@@ -1,0 +1,54 @@
+DIGEST f33183f46fccf964edd70dd1a091c8b5
+FFunction
+def 11:12 <> id
+R30:30 Function <> A var
+R35:35 Function <> A var
+R40:40 Function <> a var
+def 55:61 <> compose
+R88:88 Function <> C var
+R83:83 Function <> B var
+R101:101 Function <> B var
+R96:96 Function <> A var
+R110:110 Function <> C var
+R105:105 Function <> A var
+R128:128 Function <> A var
+R134:134 Function <> g var
+R137:137 Function <> f var
+R139:139 Function <> a var
+ax 150:169 <> extensional_equality
+R204:204 Function <> B var
+R199:199 Function <> A var
+R218:218 Function <> B var
+R213:213 Function <> A var
+R252:254 Coq.Init.Logic <> :type_scope:x_'='_x not
+R251:251 Function <> f var
+R255:256 Function <> f' var
+R237:239 Coq.Init.Logic <> :type_scope:x_'='_x not
+R234:234 Function <> f var
+R236:236 Function <> x var
+R240:241 Function <> f' var
+R243:243 Function <> x var
+prf 268:288 <> compose_left_identity
+R326:326 Function <> B var
+R321:321 Function <> A var
+R347:349 Coq.Init.Logic <> :type_scope:x_'='_x not
+R335:341 Function <> compose def
+R346:346 Function <> f var
+R343:344 Function <> id def
+R350:350 Function <> f var
+R382:401 Function <> extensional_equality prfax
+R382:401 Function <> extensional_equality prfax
+R427:433 Function <> compose def
+R447:448 Function <> id def
+prf 482:503 <> compose_right_identity
+R541:541 Function <> B var
+R536:536 Function <> A var
+R562:564 Coq.Init.Logic <> :type_scope:x_'='_x not
+R550:556 Function <> compose def
+R560:561 Function <> id def
+R558:558 Function <> f var
+R565:565 Function <> f var
+R597:616 Function <> extensional_equality prfax
+R597:616 Function <> extensional_equality prfax
+R642:648 Function <> compose def
+R662:663 Function <> id def

@@ -1,0 +1,46 @@
+DIGEST 38f3afd927c56d429571cb0ad9aec47d
+FComonad
+R15:22 Function <> <> lib
+R40:46 Functor <> <> lib
+rec 56:62 <> Comonad
+proj 93:102 <> is_functor
+proj 142:147 <> counit
+proj 184:192 <> duplicate
+proj 259:278 <> counit_left_identity
+proj 352:372 <> counit_right_identity
+proj 450:466 <> duplicate_squared
+R107:113 Functor <> Functor class
+R115:115 Comonad <> W var
+R177:177 Comonad <> A var
+R170:170 Comonad <> W var
+R172:172 Comonad <> A var
+R222:222 Comonad <> W var
+R225:225 Comonad <> W var
+R227:227 Comonad <> A var
+R215:215 Comonad <> W var
+R217:217 Comonad <> A var
+R309:309 Comonad <> W var
+R311:311 Comonad <> A var
+R340:342 Coq.Init.Logic <> :type_scope:x_'='_x not
+R320:325 Comonad <> counit meth
+R328:336 Comonad <> duplicate meth
+R338:338 Comonad <> w var
+R343:343 Comonad <> w var
+R403:403 Comonad <> W var
+R405:405 Comonad <> A var
+R439:441 Coq.Init.Logic <> :type_scope:x_'='_x not
+R414:417 Functor <> fmap meth
+R427:435 Comonad <> duplicate meth
+R437:437 Comonad <> w var
+R419:424 Comonad <> counit meth
+R442:442 Comonad <> w var
+R497:497 Comonad <> W var
+R499:499 Comonad <> A var
+R531:533 Coq.Init.Logic <> :type_scope:x_'='_x not
+R508:516 Comonad <> duplicate meth
+R519:527 Comonad <> duplicate meth
+R529:529 Comonad <> w var
+R535:538 Functor <> fmap meth
+R540:548 Comonad <> duplicate meth
+R552:560 Comonad <> duplicate meth
+R562:562 Comonad <> w var
