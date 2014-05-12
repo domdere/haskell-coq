@@ -175,6 +175,8 @@ Proof.
     admit.
 Qed.
 
+(* Actually this one probably follows immediately from the interchange law as soon as i can articulate it
+*)
 Theorem adjoint_join_associative
     : forall (F G : Type -> Type) (A : Type) (adjunction : Adjunction F G)
     , compose adjoint_join (@adjoint_join F G adjunction (G (F A))) = compose adjoint_join ((compose fmap fmap) adjoint_join).
