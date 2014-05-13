@@ -5,14 +5,12 @@ Class Adjunction (L R : Type -> Type) := {
     left_functor :> Functor L;
     right_functor :> Functor R;
 
-    (** Adjoints *)
+    (* adjoints *)
     leftAdjoint : forall {A B : Type}, (L A -> B) -> A -> R B;
 
     rightAdjoint : forall {A B : Type}, (A -> R B) -> L A -> B;
 
-    (** Laws/Properties *)
-
-    (** Adjoint Isomorphism *)
+    (* laws/properties *)
 
     adjoint_bijection_1
         : forall {A B : Type} (g : A -> R B) (a : A)
@@ -21,8 +19,6 @@ Class Adjunction (L R : Type -> Type) := {
     adjoint_bijection_2
         : forall {A B : Type} (f : L A -> B) (la : L A)
         , (rightAdjoint (leftAdjoint f)) la = f la;
-
-    (** Adjoint Naturality *)
 
     adjoint_natural_1
         : forall {A B C : Type} (f : L A -> B) (k : B -> C) (a : A)
