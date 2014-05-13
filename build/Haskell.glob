@@ -1,0 +1,9 @@
+DIGEST 40e99af650768bb6b469384e1d05bf66
+FHaskell
+R15:22 Function <> <> lib
+R40:46 Functor <> <> lib
+R64:74 Applicative <> <> lib
+R92:98 Comonad <> <> lib
+R116:120 Monad <> <> lib
+R139:143 Maybe <> <> lib
+R162:168 Functor <> <> lib
