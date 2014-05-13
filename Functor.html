@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link href="coqdoc.css" rel="stylesheet" type="text/css"/>
+<title>Functor</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library Functor</h1>
+
+<div class="code">
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="keyword">Function</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Class</span> <a name="Functor"><span class="id" type="record">Functor</span></a> (<span class="id" type="var">functor</span>: <span class="id" type="keyword">Type</span> → <span class="id" type="keyword">Type</span>) := {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a name="fmap"><span class="id" type="projection">fmap</span></a>: <span class="id" type="keyword">∀</span> {<span class="id" type="var">A</span> <span class="id" type="var">B</span> : <span class="id" type="keyword">Type</span>}, (<a class="idref" href="Functor.html#A"><span class="id" type="variable">A</span></a> → <a class="idref" href="Functor.html#B"><span class="id" type="variable">B</span></a>) → <a class="idref" href="Functor.html#functor"><span class="id" type="variable">functor</span></a> <a class="idref" href="Functor.html#A"><span class="id" type="variable">A</span></a> → <a class="idref" href="Functor.html#functor"><span class="id" type="variable">functor</span></a> <a class="idref" href="Functor.html#B"><span class="id" type="variable">B</span></a>;<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a name="functors_preserve_composition"><span class="id" type="projection">functors_preserve_composition</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <span class="id" type="keyword">∀</span> (<span class="id" type="var">A</span> <span class="id" type="var">B</span> <span class="id" type="var">C</span>: <span class="id" type="keyword">Type</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;, <span class="id" type="keyword">∀</span> (<span class="id" type="var">g</span> : <a class="idref" href="Functor.html#B"><span class="id" type="variable">B</span></a> → <a class="idref" href="Functor.html#C"><span class="id" type="variable">C</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;, <span class="id" type="keyword">∀</span> (<span class="id" type="var">f</span> : <a class="idref" href="Functor.html#A"><span class="id" type="variable">A</span></a> → <a class="idref" href="Functor.html#B"><span class="id" type="variable">B</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;, <span class="id" type="keyword">∀</span> (<span class="id" type="var">c</span> : <a class="idref" href="Functor.html#functor"><span class="id" type="variable">functor</span></a> <a class="idref" href="Functor.html#A"><span class="id" type="variable">A</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;, <a class="idref" href="Functor.html#fmap"><span class="id" type="method">fmap</span></a> <a class="idref" href="Functor.html#g"><span class="id" type="variable">g</span></a> (<a class="idref" href="Functor.html#fmap"><span class="id" type="method">fmap</span></a> <a class="idref" href="Functor.html#f"><span class="id" type="variable">f</span></a> <a class="idref" href="Functor.html#c"><span class="id" type="variable">c</span></a>) <a class="idref" href="http://coq.inria.fr/distrib/8.4pl3/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">=</span></a> <a class="idref" href="Functor.html#fmap"><span class="id" type="method">fmap</span></a> (<a class="idref" href="Function.html#compose"><span class="id" type="definition">compose</span></a> <a class="idref" href="Functor.html#g"><span class="id" type="variable">g</span></a> <a class="idref" href="Functor.html#f"><span class="id" type="variable">f</span></a>) <a class="idref" href="Functor.html#c"><span class="id" type="variable">c</span></a>;<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a name="functor_id_law"><span class="id" type="projection">functor_id_law</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <span class="id" type="keyword">∀</span> (<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>), <span class="id" type="keyword">∀</span> (<span class="id" type="var">c</span> : <a class="idref" href="Functor.html#functor"><span class="id" type="variable">functor</span></a> <a class="idref" href="Functor.html#A"><span class="id" type="variable">A</span></a>), <a class="idref" href="Functor.html#fmap"><span class="id" type="method">fmap</span></a> <a class="idref" href="Function.html#id"><span class="id" type="definition">id</span></a> <a class="idref" href="Functor.html#c"><span class="id" type="variable">c</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl3/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">=</span></a> <a class="idref" href="Function.html#id"><span class="id" type="definition">id</span></a> <a class="idref" href="Functor.html#c"><span class="id" type="variable">c</span></a><br/>
+}.<br/>
+
+<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>
