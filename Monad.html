@@ -1,0 +1,172 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link href="coqdoc.css" rel="stylesheet" type="text/css"/>
+<title>Monad</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library Monad</h1>
+
+<div class="code">
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <a class="idref" href="Applicative.html#"><span class="id" type="library">Applicative</span></a>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <span class="id" type="keyword">Function</span>.<br/>
+<span class="id" type="keyword">Require</span> <span class="id" type="keyword">Import</span> <a class="idref" href="Functor.html#"><span class="id" type="library">Functor</span></a>.<br/>
+
+<br/>
+<span class="id" type="keyword">Reserved Notation</span> "m &gt;&gt;= f" (<span class="id" type="tactic">at</span> <span class="id" type="keyword">level</span> 50).<br/>
+
+<br/>
+<span class="id" type="keyword">Class</span> <a name="Monad"><span class="id" type="record">Monad</span></a> (<span class="id" type="var">M</span>: <span class="id" type="keyword">Type</span> → <span class="id" type="keyword">Type</span>) := {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;</div>
+
+<div class="doc">
+Must be an applicative functor 
+</div>
+<div class="code">
+&nbsp;&nbsp;&nbsp;&nbsp;<a name="monads_are_applicative"><span class="id" type="projection">monads_are_applicative</span></a> :&gt; <a class="idref" href="Applicative.html#Applicative"><span class="id" type="class">Applicative</span></a> <a class="idref" href="Monad.html#M"><span class="id" type="variable">M</span></a>;<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;</div>
+
+<div class="doc">
+Functions 
+</div>
+<div class="code">
+&nbsp;&nbsp;&nbsp;&nbsp;<a name="join"><span class="id" type="projection">join</span></a> : <span class="id" type="keyword">∀</span> {<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>}, <a class="idref" href="Monad.html#M"><span class="id" type="variable">M</span></a> (<a class="idref" href="Monad.html#M"><span class="id" type="variable">M</span></a> <a class="idref" href="Monad.html#A"><span class="id" type="variable">A</span></a>) → <a class="idref" href="Monad.html#M"><span class="id" type="variable">M</span></a> <a class="idref" href="Monad.html#A"><span class="id" type="variable">A</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="keyword">where</span> "m &gt;&gt;= f" := (<a class="idref" href="Monad.html#join"><span class="id" type="method">join</span></a> (<a class="idref" href="Functor.html#fmap"><span class="id" type="method">fmap</span></a> <span class="id" type="var">f</span> <span class="id" type="var">m</span>));<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;</div>
+
+<div class="doc">
+Monad Laws 
+</div>
+<div class="code">
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a name="monad_unit_left_identity"><span class="id" type="projection">monad_unit_left_identity</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <span class="id" type="keyword">∀</span> (<span class="id" type="var">A</span> <span class="id" type="var">B</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">f</span> : <a class="idref" href="Monad.html#A"><span class="id" type="variable">A</span></a> → <a class="idref" href="Monad.html#M"><span class="id" type="variable">M</span></a> <a class="idref" href="Monad.html#B"><span class="id" type="variable">B</span></a>) (<span class="id" type="var">x</span> : <a class="idref" href="Monad.html#A"><span class="id" type="variable">A</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;, <a class="idref" href="Monad.html#f"><span class="id" type="variable">f</span></a> <a class="idref" href="Monad.html#x"><span class="id" type="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl3/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">=</span></a> <a class="idref" href="Monad.html#join"><span class="id" type="method">join</span></a> (<a class="idref" href="Functor.html#fmap"><span class="id" type="method">fmap</span></a> <a class="idref" href="Monad.html#f"><span class="id" type="variable">f</span></a> (<a class="idref" href="Applicative.html#unit"><span class="id" type="method">unit</span></a> <a class="idref" href="Monad.html#x"><span class="id" type="variable">x</span></a>));<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a name="monad_unit_right_identity"><span class="id" type="projection">monad_unit_right_identity</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <span class="id" type="keyword">∀</span> (<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">m</span> : <a class="idref" href="Monad.html#M"><span class="id" type="variable">M</span></a> <a class="idref" href="Monad.html#A"><span class="id" type="variable">A</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;, <a class="idref" href="Monad.html#m"><span class="id" type="variable">m</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl3/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">=</span></a> <a class="idref" href="Monad.html#join"><span class="id" type="method">join</span></a> (<a class="idref" href="Functor.html#fmap"><span class="id" type="method">fmap</span></a> <a class="idref" href="Applicative.html#unit"><span class="id" type="method">unit</span></a> <a class="idref" href="Monad.html#m"><span class="id" type="variable">m</span></a>);<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a name="monad_join_fmap_associative"><span class="id" type="projection">monad_join_fmap_associative</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <span class="id" type="keyword">∀</span> (<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">m</span> : <a class="idref" href="Monad.html#M"><span class="id" type="variable">M</span></a> (<a class="idref" href="Monad.html#M"><span class="id" type="variable">M</span></a> (<a class="idref" href="Monad.html#M"><span class="id" type="variable">M</span></a> <a class="idref" href="Monad.html#A"><span class="id" type="variable">A</span></a>)))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;, <a class="idref" href="Monad.html#join"><span class="id" type="method">join</span></a> (<a class="idref" href="Monad.html#join"><span class="id" type="method">join</span></a> <a class="idref" href="Monad.html#m"><span class="id" type="variable">m</span></a>) <a class="idref" href="http://coq.inria.fr/distrib/8.4pl3/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">=</span></a> <a class="idref" href="Monad.html#join"><span class="id" type="method">join</span></a> (<a class="idref" href="Functor.html#fmap"><span class="id" type="method">fmap</span></a> <a class="idref" href="Monad.html#join"><span class="id" type="method">join</span></a> <a class="idref" href="Monad.html#m"><span class="id" type="variable">m</span></a>);<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;</div>
+
+<div class="doc">
+Not sure if this property should result from the other 3 directly...
+        I'm having trouble proving it in the general case...
+    
+</div>
+<div class="code">
+&nbsp;&nbsp;&nbsp;&nbsp;<a name="monad_join_pullback"><span class="id" type="projection">monad_join_pullback</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <span class="id" type="keyword">∀</span> (<span class="id" type="var">A</span> <span class="id" type="var">B</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">f</span> : <a class="idref" href="Monad.html#A"><span class="id" type="variable">A</span></a> → <a class="idref" href="Monad.html#M"><span class="id" type="variable">M</span></a> <a class="idref" href="Monad.html#B"><span class="id" type="variable">B</span></a>) (<span class="id" type="var">mma</span> : <a class="idref" href="Monad.html#M"><span class="id" type="variable">M</span></a> (<a class="idref" href="Monad.html#M"><span class="id" type="variable">M</span></a> <a class="idref" href="Monad.html#A"><span class="id" type="variable">A</span></a>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;, <a class="idref" href="Monad.html#join"><span class="id" type="method">join</span></a> (<a class="idref" href="Functor.html#fmap"><span class="id" type="method">fmap</span></a> (<a class="idref" href="Functor.html#fmap"><span class="id" type="method">fmap</span></a> <a class="idref" href="Monad.html#f"><span class="id" type="variable">f</span></a>) <a class="idref" href="Monad.html#mma"><span class="id" type="variable">mma</span></a>) <a class="idref" href="http://coq.inria.fr/distrib/8.4pl3/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">=</span></a> <a class="idref" href="Functor.html#fmap"><span class="id" type="method">fmap</span></a> <a class="idref" href="Monad.html#f"><span class="id" type="variable">f</span></a> (<a class="idref" href="Monad.html#join"><span class="id" type="method">join</span></a> <a class="idref" href="Monad.html#mma"><span class="id" type="variable">mma</span></a>);<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;</div>
+
+<div class="doc">
+The join function should behave consistently with the Applicatives apply function,
+        The functor is supposed to characterise the behaviour of a "context",
+        The Applicative and Monad instances should both reflect the same behaviour,
+        If the behaviour differs, then the type should separated into 2.  One with
+        the Applicative behaviour (which may or may not have a Monad behaviour to extend it) and
+        another with the Monad behaviour (which will determine its Applicative behaviour
+        with monadApply defined below.)
+    
+</div>
+<div class="code">
+&nbsp;&nbsp;&nbsp;&nbsp;<a name="bind_apply_consistent"><span class="id" type="projection">bind_apply_consistent</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <span class="id" type="keyword">∀</span> (<span class="id" type="var">A</span> <span class="id" type="var">B</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">mf</span> : <a class="idref" href="Monad.html#M"><span class="id" type="variable">M</span></a> (<a class="idref" href="Monad.html#A"><span class="id" type="variable">A</span></a> → <a class="idref" href="Monad.html#B"><span class="id" type="variable">B</span></a>)) (<span class="id" type="var">ma</span> : <a class="idref" href="Monad.html#M"><span class="id" type="variable">M</span></a> <a class="idref" href="Monad.html#A"><span class="id" type="variable">A</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;, <a class="idref" href="Applicative.html#apply"><span class="id" type="method">apply</span></a> <a class="idref" href="Monad.html#mf"><span class="id" type="variable">mf</span></a> <a class="idref" href="Monad.html#ma"><span class="id" type="variable">ma</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl3/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">=</span></a> <a class="idref" href="Monad.html#join"><span class="id" type="method">join</span></a> (<a class="idref" href="Functor.html#fmap"><span class="id" type="method">fmap</span></a> (<span class="id" type="keyword">fun</span> (<span class="id" type="var">f</span> : <a class="idref" href="Monad.html#A"><span class="id" type="variable">A</span></a> → <a class="idref" href="Monad.html#B"><span class="id" type="variable">B</span></a>) ⇒ <a class="idref" href="Functor.html#fmap"><span class="id" type="method">fmap</span></a> <a class="idref" href="Monad.html#f"><span class="id" type="variable">f</span></a> <a class="idref" href="Monad.html#ma"><span class="id" type="variable">ma</span></a>) <a class="idref" href="Monad.html#mf"><span class="id" type="variable">mf</span></a>)<br/>
+}.<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="monad_unit_left_identity_1"><span class="id" type="lemma">monad_unit_left_identity_1</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;: <span class="id" type="keyword">∀</span> (<span class="id" type="var">M</span> : <span class="id" type="keyword">Type</span> → <span class="id" type="keyword">Type</span>) (<span class="id" type="var">A</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">m</span> : <a class="idref" href="Monad.html#M"><span class="id" type="variable">M</span></a> <a class="idref" href="Monad.html#A"><span class="id" type="variable">A</span></a>) (<span class="id" type="var">monad_dict</span> : <a class="idref" href="Monad.html#Monad"><span class="id" type="class">Monad</span></a> <a class="idref" href="Monad.html#M"><span class="id" type="variable">M</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;, <a class="idref" href="Monad.html#m"><span class="id" type="variable">m</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl3/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">=</span></a> <a class="idref" href="Monad.html#join"><span class="id" type="method">join</span></a> (<a class="idref" href="Applicative.html#unit"><span class="id" type="method">unit</span></a> <a class="idref" href="Monad.html#m"><span class="id" type="variable">m</span></a>).<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">intros</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">assert</span> (<a class="idref" href="Function.html#id"><span class="id" type="definition">id</span></a> <span class="id" type="var">m</span> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl3/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">=</span></a> <a class="idref" href="Monad.html#join"><span class="id" type="method">join</span></a> (<a class="idref" href="Functor.html#fmap"><span class="id" type="method">fmap</span></a> <a class="idref" href="Function.html#id"><span class="id" type="definition">id</span></a> (<a class="idref" href="Applicative.html#unit"><span class="id" type="method">unit</span></a> <span class="id" type="var">m</span>))).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">apply</span> <a class="idref" href="Monad.html#monad_unit_left_identity"><span class="id" type="method">monad_unit_left_identity</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">rewrite</span> → <a class="idref" href="Functor.html#functor_id_law"><span class="id" type="method">functor_id_law</span></a> <span class="id" type="keyword">in</span> <span class="id" type="var">H</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">unfold</span> <a class="idref" href="Function.html#id"><span class="id" type="definition">id</span></a> <span class="id" type="keyword">in</span> <span class="id" type="var">H</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">assumption</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <a name="bind"><span class="id" type="definition">bind</span></a> {<span class="id" type="var">M</span> : <span class="id" type="keyword">Type</span> → <span class="id" type="keyword">Type</span>} {<span class="id" type="var">ismonad</span> : <a class="idref" href="Monad.html#Monad"><span class="id" type="class">Monad</span></a> <a class="idref" href="Monad.html#M"><span class="id" type="variable">M</span></a>} {<span class="id" type="var">A</span> <span class="id" type="var">B</span> : <span class="id" type="keyword">Type</span>} (<span class="id" type="var">m</span> : <a class="idref" href="Monad.html#M"><span class="id" type="variable">M</span></a> <a class="idref" href="Monad.html#A"><span class="id" type="variable">A</span></a>) (<span class="id" type="var">f</span> : <a class="idref" href="Monad.html#A"><span class="id" type="variable">A</span></a> → <a class="idref" href="Monad.html#M"><span class="id" type="variable">M</span></a> <a class="idref" href="Monad.html#B"><span class="id" type="variable">B</span></a>) : <a class="idref" href="Monad.html#M"><span class="id" type="variable">M</span></a> <a class="idref" href="Monad.html#B"><span class="id" type="variable">B</span></a> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Monad.html#join"><span class="id" type="method">join</span></a> (<a class="idref" href="Functor.html#fmap"><span class="id" type="method">fmap</span></a> <a class="idref" href="Monad.html#f"><span class="id" type="variable">f</span></a> <a class="idref" href="Monad.html#m"><span class="id" type="variable">m</span></a>).<br/>
+
+<br/>
+<span class="id" type="keyword">Notation</span> <a name="::x_'>>='_x"><span class="id" type="notation">"</span></a>m &gt;&gt;= f" := (<a class="idref" href="Monad.html#bind"><span class="id" type="definition">bind</span></a> <span class="id" type="var">m</span> <span class="id" type="var">f</span>) (<span class="id" type="tactic">at</span> <span class="id" type="keyword">level</span> 50).<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+<span class="id" type="keyword">Theorem</span> <a name="bind_associative"><span class="id" type="lemma">bind_associative</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;: <span class="id" type="keyword">∀</span> (<span class="id" type="var">M</span> : <span class="id" type="keyword">Type</span> → <span class="id" type="keyword">Type</span>) (<span class="id" type="var">monad</span> : <a class="idref" href="Monad.html#Monad"><span class="id" type="class">Monad</span></a> <a class="idref" href="Monad.html#M"><span class="id" type="variable">M</span></a>) (<span class="id" type="var">A</span> <span class="id" type="var">B</span> <span class="id" type="var">C</span> : <span class="id" type="keyword">Type</span>) (<span class="id" type="var">m</span> : <a class="idref" href="Monad.html#M"><span class="id" type="variable">M</span></a> <a class="idref" href="Monad.html#A"><span class="id" type="variable">A</span></a>) (<span class="id" type="var">k</span> : <a class="idref" href="Monad.html#A"><span class="id" type="variable">A</span></a> → <a class="idref" href="Monad.html#M"><span class="id" type="variable">M</span></a> <a class="idref" href="Monad.html#B"><span class="id" type="variable">B</span></a>) (<span class="id" type="var">h</span> : <a class="idref" href="Monad.html#B"><span class="id" type="variable">B</span></a> → <a class="idref" href="Monad.html#M"><span class="id" type="variable">M</span></a> <a class="idref" href="Monad.html#C"><span class="id" type="variable">C</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;, <a class="idref" href="Monad.html#m"><span class="id" type="variable">m</span></a> <a class="idref" href="Monad.html#::x_'>>='_x"><span class="id" type="notation">&gt;&gt;=</span></a> <a class="idref" href="Monad.html#::x_'>>='_x"><span class="id" type="notation">(</span></a><a class="idref" href="Function.html#compose"><span class="id" type="definition">compose</span></a> <a class="idref" href="Monad.html#join"><span class="id" type="method">join</span></a> (<a class="idref" href="Function.html#compose"><span class="id" type="definition">compose</span></a> (<a class="idref" href="Functor.html#fmap"><span class="id" type="method">fmap</span></a> <a class="idref" href="Monad.html#h"><span class="id" type="variable">h</span></a>) <a class="idref" href="Monad.html#k"><span class="id" type="variable">k</span></a>)<a class="idref" href="Monad.html#::x_'>>='_x"><span class="id" type="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.4pl3/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">=</span></a> <a class="idref" href="Monad.html#::x_'>>='_x"><span class="id" type="notation">(</span></a><a class="idref" href="Monad.html#m"><span class="id" type="variable">m</span></a> <a class="idref" href="Monad.html#::x_'>>='_x"><span class="id" type="notation">&gt;&gt;=</span></a> <a class="idref" href="Monad.html#k"><span class="id" type="variable">k</span></a><a class="idref" href="Monad.html#::x_'>>='_x"><span class="id" type="notation">)</span></a> <a class="idref" href="Monad.html#::x_'>>='_x"><span class="id" type="notation">&gt;&gt;=</span></a> <a class="idref" href="Monad.html#h"><span class="id" type="variable">h</span></a>.<br/>
+<span class="id" type="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">intros</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">unfold</span> <a class="idref" href="Monad.html#bind"><span class="id" type="definition">bind</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">assert</span> (<a class="idref" href="Monad.html#join"><span class="id" type="method">join</span></a> (<a class="idref" href="Functor.html#fmap"><span class="id" type="method">fmap</span></a> <span class="id" type="var">k</span> <span class="id" type="var">m</span>) <a class="idref" href="http://coq.inria.fr/distrib/8.4pl3/stdlib/Coq.Init.Logic.html#:type_scope:x_'='_x"><span class="id" type="notation">=</span></a> (<a class="idref" href="Function.html#compose"><span class="id" type="definition">compose</span></a> <a class="idref" href="Monad.html#join"><span class="id" type="method">join</span></a> (<a class="idref" href="Functor.html#fmap"><span class="id" type="method">fmap</span></a> <span class="id" type="var">k</span>)) <span class="id" type="var">m</span>).<br/>
+
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">unfold</span> <a class="idref" href="Function.html#compose"><span class="id" type="definition">compose</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">reflexivity</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">rewrite</span> → <span class="id" type="var">H</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">rewrite</span> &lt;- <a class="idref" href="Functor.html#functors_preserve_composition"><span class="id" type="method">functors_preserve_composition</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">rewrite</span> &lt;- <a class="idref" href="Monad.html#monad_join_fmap_associative"><span class="id" type="method">monad_join_fmap_associative</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">rewrite</span> &lt;- <a class="idref" href="Functor.html#functors_preserve_composition"><span class="id" type="method">functors_preserve_composition</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">unfold</span> <a class="idref" href="Function.html#compose"><span class="id" type="definition">compose</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">rewrite</span> → <a class="idref" href="Monad.html#monad_join_pullback"><span class="id" type="method">monad_join_pullback</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" type="tactic">reflexivity</span>.<br/>
+<span class="id" type="keyword">Qed</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+This chain forces you to define your Applicative instance before the Monad instance,
+    and Monad instances are sometimes (read: Almost Always) easier to define than Applicative instances, this lets you go
+    in that direction, just pass in the functions that are going to become your unit and bind
+    and it will give you a function for your Applicative apply function that will satisfy
+    the applicative laws (provided the unit and bind obey the Monad laws).
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" type="keyword">Definition</span> <a name="monadLift2"><span class="id" type="definition">monadLift2</span></a> {<span class="id" type="var">M</span> : <span class="id" type="keyword">Type</span> → <span class="id" type="keyword">Type</span>} {<span class="id" type="var">A</span> <span class="id" type="var">B</span> <span class="id" type="var">C</span> : <span class="id" type="keyword">Type</span>} (<span class="id" type="var">unit'</span> : <a class="idref" href="Monad.html#C"><span class="id" type="variable">C</span></a> → <a class="idref" href="Monad.html#M"><span class="id" type="variable">M</span></a> <a class="idref" href="Monad.html#C"><span class="id" type="variable">C</span></a>) (<span class="id" type="var">bind1</span> : <a class="idref" href="Monad.html#M"><span class="id" type="variable">M</span></a> <a class="idref" href="Monad.html#A"><span class="id" type="variable">A</span></a> → (<a class="idref" href="Monad.html#A"><span class="id" type="variable">A</span></a> → <a class="idref" href="Monad.html#M"><span class="id" type="variable">M</span></a> <a class="idref" href="Monad.html#C"><span class="id" type="variable">C</span></a>) → <a class="idref" href="Monad.html#M"><span class="id" type="variable">M</span></a> <a class="idref" href="Monad.html#C"><span class="id" type="variable">C</span></a>) (<span class="id" type="var">bind2</span> : <a class="idref" href="Monad.html#M"><span class="id" type="variable">M</span></a> <a class="idref" href="Monad.html#B"><span class="id" type="variable">B</span></a> → (<a class="idref" href="Monad.html#B"><span class="id" type="variable">B</span></a> →  <a class="idref" href="Monad.html#M"><span class="id" type="variable">M</span></a> <a class="idref" href="Monad.html#C"><span class="id" type="variable">C</span></a>) → <a class="idref" href="Monad.html#M"><span class="id" type="variable">M</span></a> <a class="idref" href="Monad.html#C"><span class="id" type="variable">C</span></a>) (<span class="id" type="var">f</span> : <a class="idref" href="Monad.html#A"><span class="id" type="variable">A</span></a> → <a class="idref" href="Monad.html#B"><span class="id" type="variable">B</span></a> → <a class="idref" href="Monad.html#C"><span class="id" type="variable">C</span></a>) (<span class="id" type="var">m1</span> : <a class="idref" href="Monad.html#M"><span class="id" type="variable">M</span></a> <a class="idref" href="Monad.html#A"><span class="id" type="variable">A</span></a>) (<span class="id" type="var">m2</span> : <a class="idref" href="Monad.html#M"><span class="id" type="variable">M</span></a> <a class="idref" href="Monad.html#B"><span class="id" type="variable">B</span></a>) : <a class="idref" href="Monad.html#M"><span class="id" type="variable">M</span></a> <a class="idref" href="Monad.html#C"><span class="id" type="variable">C</span></a> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Monad.html#bind1"><span class="id" type="variable">bind1</span></a> <a class="idref" href="Monad.html#m1"><span class="id" type="variable">m1</span></a> (<span class="id" type="keyword">fun</span> (<span class="id" type="var">a</span> : <a class="idref" href="Monad.html#A"><span class="id" type="variable">A</span></a>) ⇒ <a class="idref" href="Monad.html#bind2"><span class="id" type="variable">bind2</span></a> <a class="idref" href="Monad.html#m2"><span class="id" type="variable">m2</span></a> (<span class="id" type="keyword">fun</span> (<span class="id" type="var">b</span> : <a class="idref" href="Monad.html#B"><span class="id" type="variable">B</span></a>) ⇒ <a class="idref" href="Monad.html#unit'"><span class="id" type="variable">unit'</span></a> (<a class="idref" href="Monad.html#f"><span class="id" type="variable">f</span></a> <a class="idref" href="Monad.html#a"><span class="id" type="variable">a</span></a> <a class="idref" href="Monad.html#b"><span class="id" type="variable">b</span></a>))).<br/>
+
+<br/>
+<span class="id" type="keyword">Definition</span> <a name="monadApply"><span class="id" type="definition">monadApply</span></a> {<span class="id" type="var">M</span> : <span class="id" type="keyword">Type</span> → <span class="id" type="keyword">Type</span>} {<span class="id" type="var">A</span> <span class="id" type="var">B</span> : <span class="id" type="keyword">Type</span>} (<span class="id" type="var">unit'</span> : <a class="idref" href="Monad.html#B"><span class="id" type="variable">B</span></a> → <a class="idref" href="Monad.html#M"><span class="id" type="variable">M</span></a> <a class="idref" href="Monad.html#B"><span class="id" type="variable">B</span></a>) (<span class="id" type="var">bind1</span> : <a class="idref" href="Monad.html#M"><span class="id" type="variable">M</span></a> (<a class="idref" href="Monad.html#A"><span class="id" type="variable">A</span></a> → <a class="idref" href="Monad.html#B"><span class="id" type="variable">B</span></a>) → ((<a class="idref" href="Monad.html#A"><span class="id" type="variable">A</span></a> → <a class="idref" href="Monad.html#B"><span class="id" type="variable">B</span></a>) → <a class="idref" href="Monad.html#M"><span class="id" type="variable">M</span></a> <a class="idref" href="Monad.html#B"><span class="id" type="variable">B</span></a>) → <a class="idref" href="Monad.html#M"><span class="id" type="variable">M</span></a> <a class="idref" href="Monad.html#B"><span class="id" type="variable">B</span></a>) (<span class="id" type="var">bind2</span> : <a class="idref" href="Monad.html#M"><span class="id" type="variable">M</span></a> <a class="idref" href="Monad.html#A"><span class="id" type="variable">A</span></a> → (<a class="idref" href="Monad.html#A"><span class="id" type="variable">A</span></a> → <a class="idref" href="Monad.html#M"><span class="id" type="variable">M</span></a> <a class="idref" href="Monad.html#B"><span class="id" type="variable">B</span></a>) → <a class="idref" href="Monad.html#M"><span class="id" type="variable">M</span></a> <a class="idref" href="Monad.html#B"><span class="id" type="variable">B</span></a>) : <a class="idref" href="Monad.html#M"><span class="id" type="variable">M</span></a> (<a class="idref" href="Monad.html#A"><span class="id" type="variable">A</span></a> → <a class="idref" href="Monad.html#B"><span class="id" type="variable">B</span></a>) → <a class="idref" href="Monad.html#M"><span class="id" type="variable">M</span></a> <a class="idref" href="Monad.html#A"><span class="id" type="variable">A</span></a> → <a class="idref" href="Monad.html#M"><span class="id" type="variable">M</span></a> <a class="idref" href="Monad.html#B"><span class="id" type="variable">B</span></a> :=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Monad.html#monadLift2"><span class="id" type="definition">monadLift2</span></a> <a class="idref" href="Monad.html#unit'"><span class="id" type="variable">unit'</span></a> <a class="idref" href="Monad.html#bind1"><span class="id" type="variable">bind1</span></a> <a class="idref" href="Monad.html#bind2"><span class="id" type="variable">bind2</span></a> <a class="idref" href="Function.html#id"><span class="id" type="definition">id</span></a>.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>
