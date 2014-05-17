@@ -1,0 +1,26 @@
+DIGEST a7c7b52f1a98971e8d9ddeac363e0614
+FMonoid
+R15:19 Magma <> <> lib
+R37:45 Semigroup <> <> lib
+rec 55:60 <> Monoid
+proj 118:129 <> is_semigroup
+proj 225:233 <> midentity
+proj 334:353 <> monoid_left_identity
+proj 484:504 <> monoid_right_identity
+R134:142 Semigroup <> Semigroup class
+R144:144 Monoid <> A var
+R237:237 Monoid <> A var
+R377:377 Monoid <> A var
+R390:390 Coq.Init.Logic <> :type_scope:x_'='_x not
+R406:409 Coq.Init.Logic <> :type_scope:x_'='_x not
+R400:404 Magma <> ::x_'<+>'_x not
+R391:399 Monoid <> midentity meth
+R405:405 Monoid <> a var
+R410:410 Monoid <> a var
+R528:528 Monoid <> A var
+R541:541 Coq.Init.Logic <> :type_scope:x_'='_x not
+R557:560 Coq.Init.Logic <> :type_scope:x_'='_x not
+R543:547 Magma <> ::x_'<+>'_x not
+R542:542 Monoid <> a var
+R548:556 Monoid <> midentity meth
+R561:561 Monoid <> a var

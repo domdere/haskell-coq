@@ -1,0 +1,9 @@
+DIGEST 4f176f390cdc66088e9149ea2f781713
+FMagma
+rec 6:10 <> Magma
+proj 95:99 <> mplus
+R113:113 Magma <> A var
+R108:108 Magma <> A var
+R103:103 Magma <> A var
+R142:146 Magma <> mplus meth
+not 128 <> ::x_'<+>'_x

@@ -1,0 +1,24 @@
+DIGEST 84fee9e4b25261be99afe73b88fd2a18
+FSemigroup
+R15:19 Magma <> <> lib
+rec 29:37 <> Semigroup
+proj 94:101 <> is_magma
+proj 191:213 <> semigroup_associativity
+R106:110 Magma <> Magma class
+R112:112 Semigroup <> A var
+R241:241 Semigroup <> A var
+R254:254 Coq.Init.Logic <> :type_scope:x_'='_x not
+R270:274 Coq.Init.Logic <> :type_scope:x_'='_x not
+R290:290 Coq.Init.Logic <> :type_scope:x_'='_x not
+R256:261 Magma <> ::x_'<+>'_x not
+R269:269 Magma <> ::x_'<+>'_x not
+R255:255 Semigroup <> x var
+R263:267 Magma <> ::x_'<+>'_x not
+R262:262 Semigroup <> y var
+R268:268 Semigroup <> z var
+R275:275 Magma <> ::x_'<+>'_x not
+R283:288 Magma <> ::x_'<+>'_x not
+R277:281 Magma <> ::x_'<+>'_x not
+R276:276 Semigroup <> x var
+R282:282 Semigroup <> y var
+R289:289 Semigroup <> z var
